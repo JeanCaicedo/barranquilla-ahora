@@ -2,36 +2,45 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
 import climaRoutes from './routes/clima';
 import noticiasRoutes from './routes/noticias';
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 
-app.use(cors({})); // Habilitar CORS para todas las rutas
-
-app.use(cors({
-  origin: 'http://localhost:3000'
-})); // Habilitar CORS para el frontend en localhost:3000)
-
-// Conexión a MongoDB
-mongoose.connect(process.env.MONGO_URI || '')
-  .then(() => console.log('Conectado a MongoDB'))
-  .catch((error) => console.error('Error al conectar a MongoDB:', error));
-
+// Configuración básica
+app.use(cors());
 app.use(express.json());
 
 // Endpoint de bienvenida
 app.get('/', (req, res) => {
-  res.send('Bienvenido a Barranquilla Ahora');
+  res.json({ 
+    message: 'Bienvenido a la API de Barranquilla Ahora',
+    env: {
+      port: process.env.PORT || '3002 (default)',
+      hasMeteoSourceKey: !!process.env.METEOSOURCE_API_KEY,
+      hasNewsApiKey: !!process.env.NEWS_API_KEY
+    }
+  });
 });
 
-// Rutas para clima y noticias
+// Rutas del clima
 app.use('/api/clima', climaRoutes);
+
+// Rutas de noticias
 app.use('/api/noticias', noticiasRoutes);
 
+// Endpoint de prueba
+app.get('/api/test', (req, res) => {
+  res.json({ 
+    status: 'success',
+    message: 'API funcionando correctamente',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Iniciar el servidor
 app.listen(PORT, () => {
-  console.log(`Servidor ejecutándose en el puerto ${PORT}`);
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
