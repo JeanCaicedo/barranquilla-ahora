@@ -4,7 +4,7 @@ import MainLayout from './components/Layout/MainLayout';
 import WeatherCard from './components/Weather/WeatherCard';
 import NewsCard from './components/News/NewsCard';
 
-const API_URL = 'http://localhost:3002'; // URL base del backend
+const API_URL = 'http://localhost:3002';
 
 function App() {
   const [weather, setWeather] = useState<any>(null);

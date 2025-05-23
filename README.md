@@ -27,7 +27,7 @@ Barranquilla Ahora es una aplicación web que proporciona información en tiempo
 - Node.js con Express
 - TypeScript
 - APIs integradas:
-  - MeteSource API (datos climáticos)
+  - OpenWeather API (datos climáticos)
   - NewsAPI (noticias)
 
 ## 📦 Estructura del Proyecto
@@ -63,8 +63,8 @@ npm run install:all
    - Crear archivo `.env` en la carpeta backend
    - Agregar las API keys necesarias:
 ```env
-PORT=3000
-METEOSOURCE_API_KEY=tu_api_key_aqui
+PORT=3002
+OPENWEATHER_API_KEY=tu_api_key_aqui
 NEWS_API_KEY=tu_api_key_aqui
 ```
 
@@ -75,7 +75,7 @@ npm run dev
 
 La aplicación estará disponible en:
 - Frontend: http://localhost:3001
-- Backend: http://localhost:3000
+- Backend: http://localhost:3002
 
 ## 🤝 Contribuir
 
